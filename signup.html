@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up – AppName</title>
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#signup-form">Skip to sign up form</a>
+
+  <!-- Floating accessibility button -->
+  <button id="a11y-toggle-btn-float" class="btn-a11y-float"
+          aria-haspopup="dialog" aria-expanded="false"
+          aria-label="Open accessibility settings">
+    Accessibility
+  </button>
+
+  <!-- Sign up panel -->
+  <main class="panel-left">
+    <div class="login-card">
+      <h1>Create Account</h1>
+      <p class="subtitle">Fill in the details below to get started.</p>
+
+      <div class="error-msg" id="errorMsg" role="alert" aria-live="assertive"></div>
+      <div class="success-msg" id="successMsg" role="status" aria-live="polite"></div>
+
+      <form id="signup-form" novalidate aria-label="Sign up form">
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName"
+                 placeholder="Jane Doe"
+                 autocomplete="name"
+                 aria-required="true"
+                 required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email"
+                 placeholder="you@example.com"
+                 autocomplete="email"
+                 aria-required="true"
+                 required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password"
+                 placeholder="••••••••"
+                 autocomplete="new-password"
+                 aria-required="true"
+                 required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword"
+                 placeholder="••••••••"
+                 autocomplete="new-password"
+                 aria-required="true"
+                 required />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role" aria-required="true" required>
+            <option value="">Select a role…</option>
+            <option value="user">User</option>
+            <option value="maintenance">Maintenance Staff</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-login">Create Account</button>
+      </form>
+
+      <a id="goToLogin" href="index.html" class="btn-login" style="display:none; text-align:center; text-decoration:none;">Go to Login</a>
+
+      <div class="divider" aria-hidden="true">or</div>
+
+      <p class="signup-text">Already have an account? <a href="index.html">Sign in</a></p>
+    </div>
+  </main>
+
+  <!-- Right branding panel -->
+  <div class="panel-right" role="complementary" aria-label="Application branding">
+    <div class="brand-name">AppName</div>
+    <p class="brand-tagline">A short tagline that describes your application goes here.</p>
+  </div>
+
+  <!-- Accessibility panel -->
+  <div class="a11y-overlay" id="a11y-overlay" aria-hidden="true"></div>
+
+  <aside class="a11y-panel" id="a11y-panel"
+         role="dialog" aria-label="Accessibility settings" aria-modal="true" hidden>
+    <div class="a11y-panel-header">
+      <h2>Accessibility</h2>
+      <button class="a11y-close" id="a11y-close" aria-label="Close accessibility settings">&#x2715;</button>
+    </div>
+    <div class="a11y-panel-body">
+      <p class="a11y-section-label">Display options</p>
+
+      <label class="a11y-option" for="a11y-large-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Larger Text</span>
+          <span class="a11y-option-desc">Increases all text size by ~20%</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-large-text" role="switch"
+                 aria-label="Larger Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-bold-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Bold Text</span>
+          <span class="a11y-option-desc">Makes body text heavier and easier to read</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-bold-text" role="switch"
+                 aria-label="Bold Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-high-contrast">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">High Contrast</span>
+          <span class="a11y-option-desc">Black background with white text and yellow highlights</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-high-contrast" role="switch"
+                 aria-label="High Contrast" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-dyslexia">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Dyslexia-Friendly</span>
+          <span class="a11y-option-desc">Wider font with increased letter and word spacing</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-dyslexia" role="switch"
+                 aria-label="Dyslexia-Friendly" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-opendyslexic">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">OpenDyslexic Font</span>
+          <span class="a11y-option-desc">Typeface designed to improve readability for dyslexia</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-opendyslexic" role="switch"
+                 aria-label="OpenDyslexic Font" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <button class="a11y-reset" id="a11y-reset">Reset all settings</button>
+    </div>
+  </aside>
+
+  <div class="a11y-live" id="a11y-live" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/signup.js"></script>
+  <script src="js/accessibility.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Road Metrics – AppName</title>
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/user.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-brand">
+      AppName
+    </div>
+    <div class="header-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="userInitials" aria-hidden="true">JD</div>
+        <span id="userName">John Doe</span>
+      </div>
+      <button id="a11y-toggle-btn" class="btn-a11y"
+              aria-haspopup="dialog" aria-expanded="false"
+              aria-label="Open accessibility settings">
+        Accessibility
+      </button>
+      <button class="btn-logout" onclick="window.location.href='index.html'">Log Out</button>
+    </div>
+  </header>
+
+  <!-- Tabs Bar -->
+  <div class="tabs-bar" role="tablist" aria-label="User navigation">
+    <button id="tab-btn-roads" class="tab-btn active" role="tab" aria-selected="true"
+            aria-controls="tab-roads" data-tab="roads">My Roads</button>
+  </div>
+
+  <main id="main-content">
+
+    <!-- TAB 1 – MY ROADS -->
+    <div id="tab-roads" class="tab-content active" role="tabpanel"
+         aria-labelledby="tab-btn-roads" tabindex="0">
+
+      <div class="roads-page">
+
+        <!-- Add Road -->
+        <section class="add-road-section" aria-label="Add a road">
+          <div class="add-road-row">
+            <label for="roadNameInput" class="sr-only">Road name</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="roadNameInput"
+                     placeholder="Enter a road name…" autocomplete="off"
+                     role="combobox" aria-autocomplete="list"
+                     aria-expanded="false" aria-haspopup="listbox"
+                     aria-controls="user-road-opts"
+                     aria-label="Road name" />
+              <ul id="user-road-opts" role="listbox"
+                  class="autocomplete-list hidden"
+                  aria-label="Road name suggestions"></ul>
+            </div>
+            <button class="btn-add-road" id="addRoadBtn">+ Add Road</button>
+          </div>
+          <div id="addRoadError" class="add-road-error hidden" role="alert"></div>
+        </section>
+
+        <!-- Summary Card -->
+        <section class="summary-section" aria-labelledby="summary-heading">
+          <h2 id="summary-heading">Summary</h2>
+
+          <div id="summaryIdle" class="summary-idle">
+            <p>Add roads above to view aggregate metrics.</p>
+          </div>
+
+          <div id="summaryData" class="summary-data hidden" aria-live="polite">
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="stat-value" id="summaryTotalPotholes">–</div>
+                <div class="stat-label">Total Potholes</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="summaryAvgDist">–</div>
+                <div class="stat-label">Avg. Distance (m)</div>
+              </div>
+            </div>
+            <div class="depth-section">
+              <h4>Avg. Depth Breakdown</h4>
+              <div class="depth-pct-rows">
+                <div class="depth-pct-row">
+                  <span class="depth-label">Shallow</span>
+                  <span class="depth-pct" id="summaryShallowPct">–</span>
+                </div>
+                <div class="depth-pct-row">
+                  <span class="depth-label">Medium</span>
+                  <span class="depth-pct" id="summaryMediumPct">–</span>
+                </div>
+                <div class="depth-pct-row">
+                  <span class="depth-label">Deep</span>
+                  <span class="depth-pct" id="summaryDeepPct">–</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Road Cards -->
+        <section aria-label="Added roads">
+          <div id="roadsEmpty" class="roads-empty">
+            <p>No roads added yet. Enter a road name above to get started.</p>
+          </div>
+          <div id="roadCardsContainer" class="road-cards hidden" aria-live="polite"></div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Accessibility panel -->
+  <div class="a11y-overlay" id="a11y-overlay" aria-hidden="true"></div>
+
+  <aside class="a11y-panel" id="a11y-panel"
+         role="dialog" aria-label="Accessibility settings" aria-modal="true" hidden>
+    <div class="a11y-panel-header">
+      <h2>Accessibility</h2>
+      <button class="a11y-close" id="a11y-close" aria-label="Close accessibility settings">&#x2715;</button>
+    </div>
+    <div class="a11y-panel-body">
+      <p class="a11y-section-label">Display options</p>
+
+      <label class="a11y-option" for="a11y-large-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Larger Text</span>
+          <span class="a11y-option-desc">Increases all text size by ~20%</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-large-text" role="switch"
+                 aria-label="Larger Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-bold-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Bold Text</span>
+          <span class="a11y-option-desc">Makes body text heavier and easier to read</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-bold-text" role="switch"
+                 aria-label="Bold Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-high-contrast">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">High Contrast</span>
+          <span class="a11y-option-desc">Black background with white text and yellow highlights</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-high-contrast" role="switch"
+                 aria-label="High Contrast" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-dyslexia">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Dyslexia-Friendly</span>
+          <span class="a11y-option-desc">Wider font with increased letter and word spacing</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-dyslexia" role="switch"
+                 aria-label="Dyslexia-Friendly" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-opendyslexic">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">OpenDyslexic Font</span>
+          <span class="a11y-option-desc">Typeface designed to improve readability for dyslexia</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-opendyslexic" role="switch"
+                 aria-label="OpenDyslexic Font" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <button class="a11y-reset" id="a11y-reset">Reset all settings</button>
+    </div>
+  </aside>
+
+  <div class="a11y-live" id="a11y-live" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/user.js"></script>
+  <script src="js/accessibility.js"></script>
+
+</body>
+</html>

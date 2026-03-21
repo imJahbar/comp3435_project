@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance Dashboard – AppName</title>
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/maintenance.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-brand">
+      AppName
+    </div>
+    <div class="header-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="userInitials" aria-hidden="true">MU</div>
+        <span id="userName">Maintenance User</span>
+      </div>
+      <span class="role-badge" aria-label="User role: Maintenance">Maintenance</span>
+      <button id="a11y-toggle-btn" class="btn-a11y"
+              aria-haspopup="dialog" aria-expanded="false"
+              aria-label="Open accessibility settings">
+        Accessibility
+      </button>
+      <button class="btn-logout" onclick="window.location.href='index.html'">Log Out</button>
+    </div>
+  </header>
+
+  <!-- Tabs Bar -->
+  <div class="tabs-bar" role="tablist" aria-label="Maintenance navigation">
+    <button class="tab-btn active" role="tab" aria-selected="true"
+            aria-controls="tab-addroad" data-tab="addroad">Add Road Data</button>
+    <button class="tab-btn" role="tab" aria-selected="false"
+            aria-controls="tab-maint" data-tab="maint">Road Maintenance</button>
+    <button class="tab-btn" role="tab" aria-selected="false"
+            aria-controls="tab-reports" data-tab="reports">Reports</button>
+  </div>
+
+  <main id="main-content">
+
+    <!-- TAB 1 – ADD ROAD DATA -->
+    <div id="tab-addroad" class="tab-content active" role="tabpanel" tabindex="0">
+
+      <h2 class="section-heading">
+        Add Road Data
+        <span>Register new roads or log pothole observations</span>
+      </h2>
+
+      <div class="addroad-panels">
+
+        <!-- Left: Add New Road -->
+        <section class="addroad-panel" aria-labelledby="panel-addroad-heading">
+          <h3 id="panel-addroad-heading">Add New Road</h3>
+          <p class="panel-desc">Enter a road name and click <strong>Check Road</strong>. If it doesn't exist you can add it.</p>
+
+          <label for="addroad-check-input" class="form-field-label">Road Name</label>
+          <input type="text" id="addroad-check-input"
+                 placeholder="e.g. Cave Hill Road…" autocomplete="off"
+                 aria-label="Road name to check or add" />
+
+          <div id="addroad-check-msg" class="road-check-msg" aria-live="polite"></div>
+
+          <!-- Shown only when road is not found -->
+          <div id="addroad-extra-fields" class="addroad-extra-fields hidden">
+            <label for="addroad-type" class="form-field-label">Road Type</label>
+            <select id="addroad-type" aria-label="Road type">
+              <option value="">Select a type…</option>
+              <option value="highway4">Highway (4 Lanes)</option>
+              <option value="highway2">Highway (2 Lanes)</option>
+              <option value="residential">Residential</option>
+              <option value="cart">Cart Road</option>
+            </select>
+
+            <label for="addroad-length" class="form-field-label">Road Length (km, whole number, max 10)</label>
+            <input type="number" id="addroad-length"
+                   min="1" max="10" step="1" placeholder="e.g. 3"
+                   aria-label="Road length in kilometres" />
+          </div>
+
+          <div class="addroad-btn-row">
+            <button class="btn-add-road" id="addroad-btn">Check Road</button>
+            <button class="btn-cancel-road hidden" id="addroad-cancel-btn">Cancel</button>
+          </div>
+          <div id="addroad-error" class="add-road-error hidden" role="alert"></div>
+        </section>
+
+        <!-- Right: Add Pothole Data -->
+        <section class="addroad-panel" aria-labelledby="panel-pothole-heading">
+          <h3 id="panel-pothole-heading">Add Pothole Data</h3>
+          <p class="panel-desc">Select a road and log observed potholes by date. Each submission adds a new entry.</p>
+
+          <label for="addpothole-road-input" class="form-field-label">Road</label>
+          <div class="autocomplete-wrap">
+            <input type="text" id="addpothole-road-input"
+                   placeholder="Select or type a road…" autocomplete="off"
+                   role="combobox" aria-autocomplete="list"
+                   aria-expanded="false" aria-haspopup="listbox"
+                   aria-controls="addpothole-road-opts"
+                   aria-label="Road name for pothole data" />
+            <ul id="addpothole-road-opts" role="listbox"
+                class="autocomplete-list hidden"
+                aria-label="Road name suggestions"></ul>
+          </div>
+
+          <label for="addpothole-date" class="form-field-label" style="margin-top:0.85rem;">Date of Observation</label>
+          <input type="date" id="addpothole-date" aria-label="Date of observation" />
+
+          <div class="pothole-inputs-row" style="margin-top:0.85rem;">
+            <div class="pothole-input-group">
+              <label for="addpothole-shallow">
+                <span class="depth-dot shallow" aria-hidden="true"></span>Shallow
+              </label>
+              <input type="number" id="addpothole-shallow" min="0" value="0"
+                     aria-label="Shallow potholes" />
+            </div>
+            <div class="pothole-input-group">
+              <label for="addpothole-medium">
+                <span class="depth-dot medium" aria-hidden="true"></span>Medium
+              </label>
+              <input type="number" id="addpothole-medium" min="0" value="0"
+                     aria-label="Medium potholes" />
+            </div>
+            <div class="pothole-input-group">
+              <label for="addpothole-deep">
+                <span class="depth-dot deep" aria-hidden="true"></span>Deep
+              </label>
+              <input type="number" id="addpothole-deep" min="0" value="0"
+                     aria-label="Deep potholes" />
+            </div>
+          </div>
+
+          <button class="btn-add-road" id="addpothole-btn" style="margin-top:1rem;">Log Potholes</button>
+          <div id="addpothole-error" class="add-road-error hidden" role="alert"></div>
+          <div id="addpothole-success" class="addpothole-success hidden" aria-live="polite"></div>
+        </section>
+
+      </div>
+    </div>
+
+
+    <!-- TAB 2 – ROAD MAINTENANCE -->
+    <div id="tab-maint" class="tab-content" role="tabpanel" tabindex="0">
+
+      <h2 class="section-heading">
+        Road Maintenance
+        <span>Repair cost estimation and resurfacing decisions</span>
+      </h2>
+
+      <div class="maint-panels">
+
+        <!-- Left panel -->
+        <div class="maint-panel-left">
+
+          <!-- Road search -->
+          <div class="maint-search-row">
+            <label for="maint-road-input" class="sr-only">Road name</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="maint-road-input"
+                     placeholder="e.g. Spring Garden Highway…" autocomplete="off"
+                     role="combobox" aria-autocomplete="list"
+                     aria-expanded="false" aria-haspopup="listbox"
+                     aria-controls="maint-road-opts"
+                     aria-label="Road name for maintenance" />
+              <ul id="maint-road-opts" role="listbox"
+                  class="autocomplete-list hidden"
+                  aria-label="Road name suggestions"></ul>
+            </div>
+            <button class="btn-primary" id="maint-btn">Load Road</button>
+          </div>
+
+          <!-- States -->
+          <div id="maint-idle" class="state-box">
+            <p>Enter a road name above to load repair cost information.</p>
+          </div>
+          <div id="maint-loading" class="state-box hidden" aria-busy="true">
+            <div class="spinner" role="status" aria-label="Loading"></div>
+            <p>Loading road data…</p>
+          </div>
+          <div id="maint-error" class="state-box error hidden" role="alert">
+            <p id="maint-error-msg">Road not found. Please try again.</p>
+          </div>
+
+          <!-- Results -->
+          <div id="maint-results" class="hidden" aria-live="polite">
+            <h3 class="results-road-name" id="maint-results-road-name"></h3>
+
+            <table class="breakdown-table">
+              <thead>
+                <tr><th>Category</th><th>Quantity</th><th>Extended Cost</th></tr>
+              </thead>
+              <tbody id="maint-breakdown-body"></tbody>
+              <tfoot id="maint-breakdown-foot"></tfoot>
+            </table>
+
+            <div class="repair-time-row">
+              <span class="repair-time-label">Estimated repair time</span>
+              <span class="repair-time-value" id="maint-repair-time">–</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right panel -->
+        <div class="maint-panel-right">
+          <div id="maint-action-idle" class="action-idle">
+            <p>Load a road on the left to see maintenance options.</p>
+          </div>
+          <div id="maint-action-loaded" class="action-loaded hidden">
+            <p class="action-road-label" id="maint-action-road-name"></p>
+            <p class="action-note" id="maint-action-note"></p>
+            <button class="btn-action" id="maint-action-btn"></button>
+            <button class="btn-cancel-maint" id="maint-cancel-btn">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pricing reference -->
+      <div class="maint-info-static" role="note" aria-label="Pricing reference">
+        <p class="maint-info-static-title">Pricing Reference</p>
+        <div class="maint-info-tiles">
+          <div class="maint-info-tile">
+            <span class="maint-info-tile-cost">$20</span>
+            <span class="maint-info-tile-label">Shallow repair</span>
+          </div>
+          <div class="maint-info-tile">
+            <span class="maint-info-tile-cost">$50</span>
+            <span class="maint-info-tile-label">Medium repair</span>
+          </div>
+          <div class="maint-info-tile">
+            <span class="maint-info-tile-cost">$100</span>
+            <span class="maint-info-tile-label">Deep repair</span>
+          </div>
+          <div class="maint-info-tile">
+            <span class="maint-info-tile-cost">$100<span class="maint-info-tile-unit">/km</span></span>
+            <span class="maint-info-tile-label">Resurfacing</span>
+          </div>
+        </div>
+        <p class="maint-info-note">Resurfacing is recommended when total repair cost exceeds $1,000</p>
+      </div>
+
+    </div>
+
+
+    <!-- TAB 3 – REPORTS -->
+    <div id="tab-reports" class="tab-content" role="tabpanel" tabindex="0">
+
+      <div class="reports-page">
+
+        <!-- 1: Monthly Pothole Tracking -->
+        <section class="report-section" aria-labelledby="rpt-monthly-heading">
+          <div class="report-section-header">
+            <div>
+              <h2 id="rpt-monthly-heading">Monthly Pothole Tracking</h2>
+              <p>Pothole observations per month for a specific road and year</p>
+            </div>
+            <div class="report-controls">
+              <select id="rpt-monthly-year" class="rpt-year-select" aria-label="Year">
+                <option value="">Year…</option>
+              </select>
+              <div class="autocomplete-wrap">
+                <input type="text" id="rpt-monthly-input"
+                       placeholder="Road name…" autocomplete="off"
+                       role="combobox" aria-autocomplete="list"
+                       aria-expanded="false" aria-haspopup="listbox"
+                       aria-controls="rpt-monthly-opts"
+                       aria-label="Road name for monthly tracking" />
+                <ul id="rpt-monthly-opts" role="listbox"
+                    class="autocomplete-list hidden"
+                    aria-label="Road name suggestions"></ul>
+              </div>
+              <button class="btn-load-report" id="rpt-monthly-btn">Load Report</button>
+            </div>
+          </div>
+          <div id="rpt-monthly-error"   class="report-error hidden" role="alert"></div>
+          <div id="rpt-monthly-results" class="report-table-wrap hidden" aria-live="polite"></div>
+        </section>
+
+        <!-- 2: Potholes by Road Type -->
+        <section class="report-section" aria-labelledby="rpt-roadtype-heading">
+          <div class="report-section-header">
+            <div>
+              <h2 id="rpt-roadtype-heading">Potholes by Road Type</h2>
+              <p>Net potholes per month by road classification (observations minus repairs)</p>
+            </div>
+            <div class="report-controls">
+              <select id="rpt-roadtype-year" class="rpt-year-select" aria-label="Year">
+                <option value="">Year…</option>
+              </select>
+              <button class="btn-load-report" id="rpt-roadtype-btn">Load Report</button>
+            </div>
+          </div>
+          <div id="rpt-roadtype-error"   class="report-error hidden" role="alert"></div>
+          <div id="rpt-roadtype-results" class="report-table-wrap hidden rpt-type-grid" aria-live="polite"></div>
+        </section>
+
+        <!-- 3: Potholes Repaired Per Road -->
+        <section class="report-section" aria-labelledby="rpt-repaired-heading">
+          <div class="report-section-header">
+            <div>
+              <h2 id="rpt-repaired-heading">Potholes Repaired Per Road</h2>
+              <p>Total potholes repaired per road for the selected year</p>
+            </div>
+            <div class="report-controls">
+              <select id="rpt-repaired-year" class="rpt-year-select" aria-label="Year">
+                <option value="">Year…</option>
+              </select>
+              <button class="btn-load-report" id="rpt-repaired-btn">Load Report</button>
+            </div>
+          </div>
+          <div id="rpt-repaired-error"   class="report-error hidden" role="alert"></div>
+          <div id="rpt-repaired-results" class="report-table-wrap hidden" aria-live="polite"></div>
+        </section>
+
+        <!-- 4: Roads Resurfaced -->
+        <section class="report-section" aria-labelledby="rpt-resurfaced-heading">
+          <div class="report-section-header">
+            <div>
+              <h2 id="rpt-resurfaced-heading">Roads Resurfaced</h2>
+              <p>All roads that underwent full resurfacing in the selected year</p>
+            </div>
+            <div class="report-controls">
+              <select id="rpt-resurfaced-year" class="rpt-year-select" aria-label="Year">
+                <option value="">Year…</option>
+              </select>
+              <button class="btn-load-report" id="rpt-resurfaced-btn">Load Report</button>
+            </div>
+          </div>
+          <div id="rpt-resurfaced-error"   class="report-error hidden" role="alert"></div>
+          <div id="rpt-resurfaced-results" class="report-table-wrap hidden" aria-live="polite"></div>
+        </section>
+
+        <!-- 5: Total Pothole Types Per Month -->
+        <section class="report-section" aria-labelledby="rpt-sysmonthly-heading">
+          <div class="report-section-header">
+            <div>
+              <h2 id="rpt-sysmonthly-heading">Total Pothole Types Per Month</h2>
+              <p>System-wide monthly observation totals across all roads</p>
+            </div>
+            <div class="report-controls">
+              <select id="rpt-sysmonthly-year" class="rpt-year-select" aria-label="Year">
+                <option value="">Year…</option>
+              </select>
+              <button class="btn-load-report" id="rpt-sysmonthly-btn">Load Report</button>
+            </div>
+          </div>
+          <div id="rpt-sysmonthly-error"   class="report-error hidden" role="alert"></div>
+          <div id="rpt-sysmonthly-results" class="report-table-wrap hidden" aria-live="polite"></div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Accessibility panel -->
+  <div class="a11y-overlay" id="a11y-overlay" aria-hidden="true"></div>
+
+  <aside class="a11y-panel" id="a11y-panel"
+         role="dialog" aria-label="Accessibility settings" aria-modal="true" hidden>
+    <div class="a11y-panel-header">
+      <h2>Accessibility</h2>
+      <button class="a11y-close" id="a11y-close" aria-label="Close accessibility settings">&#x2715;</button>
+    </div>
+    <div class="a11y-panel-body">
+      <p class="a11y-section-label">Display options</p>
+
+      <label class="a11y-option" for="a11y-large-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Larger Text</span>
+          <span class="a11y-option-desc">Increases all text size by ~20%</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-large-text" role="switch"
+                 aria-label="Larger Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-bold-text">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Bold Text</span>
+          <span class="a11y-option-desc">Makes body text heavier and easier to read</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-bold-text" role="switch"
+                 aria-label="Bold Text" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-high-contrast">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">High Contrast</span>
+          <span class="a11y-option-desc">Black background with white text and yellow highlights</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-high-contrast" role="switch"
+                 aria-label="High Contrast" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-dyslexia">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">Dyslexia-Friendly</span>
+          <span class="a11y-option-desc">Wider font with increased letter and word spacing</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-dyslexia" role="switch"
+                 aria-label="Dyslexia-Friendly" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="a11y-option" for="a11y-opendyslexic">
+        <div class="a11y-option-info">
+          <span class="a11y-option-name">OpenDyslexic Font</span>
+          <span class="a11y-option-desc">Typeface designed to improve readability for dyslexia</span>
+        </div>
+        <span class="a11y-switch">
+          <input type="checkbox" id="a11y-opendyslexic" role="switch"
+                 aria-label="OpenDyslexic Font" aria-checked="false" />
+          <span class="a11y-switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <button class="a11y-reset" id="a11y-reset">Reset all settings</button>
+    </div>
+  </aside>
+
+  <div class="a11y-live" id="a11y-live" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/maintenance.js"></script>
+  <script src="js/accessibility.js"></script>
+
+</body>
+</html>

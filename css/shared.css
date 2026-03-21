@@ -1,0 +1,225 @@
+/* SHARED.CSS */
+
+/* Design References*/
+:root {
+  /* Brand */
+  --brand:        #0f3460;       /* no close named equivalent */
+  --brand-dark:   midnightblue;  /* gradient starts & hover states */
+  --accent:       #e94560;       /* no close named equivalent */
+  --border:       gainsboro;
+  --text:         #111827;       /* no close named equivalent */
+  --text-muted:   dimgray;
+  --text-dim:     darkgray;
+  --focus-ring:   rgba(15, 52, 96, 0.1);
+  --error:        crimson;
+  --success:      seagreen;
+  --info:         steelblue;
+  --warning:      saddlebrown;
+  --depth-medium: sienna;
+  --resurface:    darkorange;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 1rem;
+  background: whitesmoke;
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, var(--brand-dark) 0%, var(--brand) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 58px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* User badge */
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(233, 69, 96, 0.3);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Logout button */
+.btn-logout {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-logout:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* Tabs bar */
+.tabs-bar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  padding: 0 2rem;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  padding: 0.85rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.tab-btn.active {
+  color: var(--brand);
+  border-bottom-color: var(--accent);
+}
+
+.tab-btn:hover:not(.active) { color: var(--text-muted); }
+.tab-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: -2px; }
+
+/* Main */
+main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Autocomplete combobox */
+.autocomplete-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.autocomplete-wrap input { width: 100%; }
+
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  max-height: 220px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0.25rem 0;
+}
+
+.autocomplete-list li {
+  padding: 0.55rem 0.9rem;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.autocomplete-list li:hover,
+.autocomplete-list li[aria-selected="true"] {
+  background: aliceblue;
+  color: var(--brand);
+}
+
+/* Add road button */
+.btn-add-road {
+  padding: 0.65rem 1.25rem;
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-add-road:hover { background: var(--brand-dark); }
+.btn-add-road:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Add road error */
+.add-road-error {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--error);
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  margin: 0 auto 0.75rem;
+}

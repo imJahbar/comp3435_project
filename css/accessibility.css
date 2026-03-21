@@ -1,0 +1,622 @@
+/* ACCESSIBILITY */
+
+/* Toggle button */
+.btn-a11y {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-a11y:hover  { background: rgba(255,255,255,0.2); }
+.btn-a11y:focus-visible { outline: 3px solid yellow; outline-offset: 2px; }
+
+
+/* Floating button on login page */
+.btn-a11y-float {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: navy;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 0.45rem 0.85rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.btn-a11y-float:hover { background: darkblue; }
+.btn-a11y-float:focus-visible { outline: 3px solid yellow; outline-offset: 2px; }
+
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  background: yellow;
+  color: black;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 6px 6px;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.skip-link:focus { top: 0; }
+
+/* Overlay */
+.a11y-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+}
+
+.a11y-overlay.open { display: block; }
+
+/* Panel drawer */
+.a11y-panel {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 320px;
+  height: 100vh;
+  background: white;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.18);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.a11y-panel.open { right: 0; }
+
+.a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  background: linear-gradient(90deg, black, navy);
+  color: white;
+  flex-shrink: 0;
+}
+
+.a11y-panel-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.a11y-close {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.a11y-close:hover { background: rgba(255,255,255,0.3); }
+.a11y-close:focus-visible { outline: 3px solid yellow; outline-offset: 2px; }
+
+.a11y-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.a11y-section-label {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: darkgray;
+  margin: 1rem 0 0.6rem;
+}
+
+.a11y-section-label:first-child { margin-top: 0; }
+
+/* Toggle row */
+.a11y-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid whitesmoke;
+  cursor: pointer;
+}
+
+.a11y-option:last-child { border-bottom: none; }
+
+.a11y-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.a11y-option-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: black;
+}
+
+.a11y-option-desc {
+  font-size: 1rem;
+  color: gray;
+}
+
+/* Accessible toggle switch */
+.a11y-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.a11y-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.a11y-switch-track {
+  position: absolute;
+  inset: 0;
+  background: lightgray;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.a11y-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.a11y-switch input:checked + .a11y-switch-track { background: navy; }
+.a11y-switch input:checked + .a11y-switch-track::after { transform: translateX(20px); }
+.a11y-switch input:focus-visible + .a11y-switch-track { outline: 3px solid crimson; outline-offset: 2px; }
+
+/* Reset button */
+.a11y-reset {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.65rem;
+  background: whitesmoke;
+  border: 1.5px solid gainsboro;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: dimgray;
+  cursor: pointer;
+}
+
+.a11y-reset:hover { background: gainsboro; }
+.a11y-reset:focus-visible { outline: 3px solid navy; outline-offset: 2px; }
+
+/* Live region for screen reader announcements */
+.a11y-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+
+/* MODE 1 - LARGER TEXT */
+html.a11y-large-text { font-size: 118%; }
+
+
+/* MODE 2 - BOLD TEXT */
+html.a11y-bold-text p,
+html.a11y-bold-text span,
+html.a11y-bold-text td,
+html.a11y-bold-text th,
+html.a11y-bold-text label,
+html.a11y-bold-text li,
+html.a11y-bold-text div {
+  font-weight: 600 !important;
+}
+
+html.a11y-bold-text input,
+html.a11y-bold-text textarea,
+html.a11y-bold-text select {
+  font-weight: 600 !important;
+}
+
+
+/* MODE 3 – HIGH CONTRAST */
+html.a11y-high-contrast body {
+  background: black !important;
+  color: white !important;
+}
+
+/* Header */
+html.a11y-high-contrast header {
+  background: black !important;
+  border-bottom: 2px solid white !important;
+  box-shadow: none !important;
+}
+
+html.a11y-high-contrast .header-brand,
+html.a11y-high-contrast .user-badge,
+html.a11y-high-contrast #userName {
+  color: white !important;
+}
+
+html.a11y-high-contrast .user-avatar {
+  background: black !important;
+  border-color: yellow !important;
+  color: yellow !important;
+}
+
+html.a11y-high-contrast .role-badge {
+  background: black !important;
+  border: 2px solid yellow !important;
+  color: yellow !important;
+}
+
+/* Tabs */
+html.a11y-high-contrast .tabs-bar {
+  background: black !important;
+  border-bottom: 2px solid white !important;
+}
+
+html.a11y-high-contrast .tab-btn {
+  color: white !important;
+  background: black !important;
+}
+
+html.a11y-high-contrast .tab-btn.active {
+  color: yellow !important;
+  border-bottom-color: yellow !important;
+}
+
+/* Buttons */
+html.a11y-high-contrast .btn-primary,
+html.a11y-high-contrast .btn-get-route,
+html.a11y-high-contrast .btn-search,
+html.a11y-high-contrast .btn-login {
+  background: yellow !important;
+  color: black !important;
+  border: 2px solid black !important;
+}
+
+html.a11y-high-contrast .btn-logout,
+html.a11y-high-contrast .btn-a11y,
+html.a11y-high-contrast .btn-a11y-float {
+  background: black !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Inputs */
+html.a11y-high-contrast input[type="text"],
+html.a11y-high-contrast input[type="email"],
+html.a11y-high-contrast input[type="password"],
+html.a11y-high-contrast .search-bar input,
+html.a11y-high-contrast .search-row input,
+html.a11y-high-contrast .input-with-icon input {
+  background: black !important;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
+html.a11y-high-contrast select,
+html.a11y-high-contrast .rpt-year-select {
+  background: black !important;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
+html.a11y-high-contrast input:focus,
+html.a11y-high-contrast input:focus-visible {
+  border-color: yellow !important;
+  box-shadow: 0 0 0 3px yellow !important;
+}
+
+/* Cards and panels */
+html.a11y-high-contrast .login-card,
+html.a11y-high-contrast .panel-left,
+html.a11y-high-contrast .route-sidebar,
+html.a11y-high-contrast .state-box,
+html.a11y-high-contrast .results-panel,
+html.a11y-high-contrast .sidebar-results,
+html.a11y-high-contrast .monthly-table-wrap,
+html.a11y-high-contrast #monthly-results,
+html.a11y-high-contrast .info-collapsible,
+html.a11y-high-contrast .breakdown-table,
+html.a11y-high-contrast .action-idle,
+html.a11y-high-contrast .action-loaded {
+  background: black !important;
+  color: white !important;
+  border: 1.5px solid white !important;
+  box-shadow: none !important;
+}
+
+/* Tables */
+html.a11y-high-contrast table { border-collapse: collapse; }
+
+html.a11y-high-contrast th {
+  background: black !important;
+  color: yellow !important;
+  border-bottom: 2px solid white !important;
+}
+
+html.a11y-high-contrast td {
+  background: black !important;
+  color: white !important;
+  border-bottom: 1px solid dimgray !important;
+}
+
+html.a11y-high-contrast tfoot td {
+  background: black !important;
+  color: yellow !important;
+}
+
+html.a11y-high-contrast tbody tr:hover td { background: black !important; }
+
+/* Road items */
+html.a11y-high-contrast .road-item { color: white !important; }
+html.a11y-high-contrast .road-item:hover { background: black !important; }
+html.a11y-high-contrast .road-item.selected { background: black !important; color: yellow !important; }
+
+/* Login panels */
+html.a11y-high-contrast .panel-right {
+  background: black !important;
+  border-left: 2px solid white !important;
+}
+
+html.a11y-high-contrast .brand-tagline { color: silver !important; }
+
+html.a11y-high-contrast .forgot-link,
+html.a11y-high-contrast .signup-text a {
+  color: yellow !important;
+}
+
+html.a11y-high-contrast .divider { color: gray !important; }
+html.a11y-high-contrast .divider::before,
+html.a11y-high-contrast .divider::after { background: dimgray !important; }
+
+/* Map placeholder */
+html.a11y-high-contrast #map { background: black !important; }
+
+/* Stat cards */
+html.a11y-high-contrast .stat-card { background: black !important; }
+html.a11y-high-contrast .stat-card .stat-value { color: yellow !important; }
+
+/* Depth bars */
+html.a11y-high-contrast .depth-bar-track,
+html.a11y-high-contrast .threshold-bar-wrap { background: dimgray !important; }
+
+/* Report sections */
+html.a11y-high-contrast .report-section { background: black !important; border: 1.5px solid white !important; box-shadow: none !important; }
+html.a11y-high-contrast .report-section-header { border-color: dimgray !important; }
+html.a11y-high-contrast .report-section-header h2 { color: white !important; }
+html.a11y-high-contrast .report-section-header p { color: darkgray !important; }
+html.a11y-high-contrast .rpt-type-block { background: black !important; }
+html.a11y-high-contrast .rpt-type-label { color: white !important; }
+html.a11y-high-contrast .report-empty { color: darkgray !important; }
+
+/* A11y panel itself */
+html.a11y-high-contrast .a11y-panel { background: black !important; }
+html.a11y-high-contrast .a11y-option { border-color: dimgray !important; }
+html.a11y-high-contrast .a11y-option-name { color: white !important; }
+html.a11y-high-contrast .a11y-option-desc { color: darkgray !important; }
+html.a11y-high-contrast .a11y-reset { background: black !important; color: white !important; border-color: white !important; }
+
+/* Maintenance pricing reference */
+html.a11y-high-contrast .maint-info-static { background: black !important; border-color: dimgray !important; }
+html.a11y-high-contrast .maint-info-tile { background: black !important; border-color: white !important; }
+html.a11y-high-contrast .maint-info-tile-cost { color: yellow !important; }
+html.a11y-high-contrast .maint-info-tile-label,
+html.a11y-high-contrast .maint-info-tile-unit { color: silver !important; }
+html.a11y-high-contrast .maint-info-static-title,
+html.a11y-high-contrast .maint-info-note { color: silver !important; }
+
+/* Shared page headings */
+html.a11y-high-contrast .section-heading { color: white !important; }
+html.a11y-high-contrast .section-heading span { color: silver !important; }
+
+/* Button additions: action buttons → yellow/black */
+html.a11y-high-contrast .btn-add-road,
+html.a11y-high-contrast .btn-load-report,
+html.a11y-high-contrast .btn-action-repair,
+html.a11y-high-contrast .btn-action-resurface {
+  background: yellow !important;
+  color: black !important;
+  border: 2px solid black !important;
+}
+
+/* Button additions: cancel / secondary buttons → black/white */
+html.a11y-high-contrast .btn-cancel-road,
+html.a11y-high-contrast .btn-cancel-maint,
+html.a11y-high-contrast .btn-remove-road {
+  background: black !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Input type additions */
+html.a11y-high-contrast input[type="number"],
+html.a11y-high-contrast input[type="date"] {
+  background: black !important;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
+/* TAB 1 – ADD ROAD DATA ── */
+html.a11y-high-contrast .addroad-panel {
+  background: black !important;
+  color: white !important;
+  border: 1.5px solid white !important;
+  box-shadow: none !important;
+}
+html.a11y-high-contrast .addroad-panel h3 { color: white !important; }
+html.a11y-high-contrast .panel-desc { color: silver !important; }
+html.a11y-high-contrast .form-field-label { color: white !important; }
+html.a11y-high-contrast .addroad-extra-fields {
+  background: black !important;
+  border-color: dimgray !important;
+}
+html.a11y-high-contrast .pothole-input-group label { color: white !important; }
+html.a11y-high-contrast .road-check-found {
+  background: black !important;
+  color: yellow !important;
+  border-color: yellow !important;
+}
+html.a11y-high-contrast .road-check-new {
+  background: black !important;
+  color: white !important;
+  border-color: white !important;
+}
+html.a11y-high-contrast .road-check-tracked {
+  background: black !important;
+  color: yellow !important;
+  border-color: yellow !important;
+}
+html.a11y-high-contrast .addpothole-success {
+  background: black !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+/* ── TAB 2 – ROAD MAINTENANCE ── */
+html.a11y-high-contrast .results-road-name { color: white !important; }
+html.a11y-high-contrast .repair-time-row {
+  background: black !important;
+  border: 1px solid white !important;
+  box-shadow: none !important;
+}
+html.a11y-high-contrast .repair-time-label { color: white !important; }
+html.a11y-high-contrast .repair-time-value { color: yellow !important; }
+html.a11y-high-contrast .action-road-label { color: white !important; }
+html.a11y-high-contrast .action-note { color: silver !important; }
+
+/* Monthly table header (inside dark .monthly-table-wrap) */
+html.a11y-high-contrast .monthly-table-header { border-bottom: 1px solid dimgray !important; }
+html.a11y-high-contrast .monthly-table-header h3 { color: white !important; }
+html.a11y-high-contrast .monthly-table-header span { color: silver !important; }
+
+/* Depth-coded table cells */
+/* Original amber/red colours have poor contrast on black — normalise to white */
+html.a11y-high-contrast .td-shallow,
+html.a11y-high-contrast .td-medium,
+html.a11y-high-contrast .td-deep { color: white !important; }
+html.a11y-high-contrast .td-total { color: yellow !important; }
+html.a11y-high-contrast .td-zero { color: dimgray !important; }
+
+/* User page – My Roads */
+html.a11y-high-contrast .summary-section {
+  background: black !important;
+  color: white !important;
+  border: 1.5px solid white !important;
+  box-shadow: none !important;
+}
+html.a11y-high-contrast .summary-section h2 { color: white !important; }
+html.a11y-high-contrast .summary-idle p,
+html.a11y-high-contrast .roads-empty p { color: silver !important; }
+html.a11y-high-contrast .road-card {
+  background: black !important;
+  color: white !important;
+  border: 1.5px solid white !important;
+  box-shadow: none !important;
+}
+html.a11y-high-contrast .road-card-header {
+  background: black !important;
+  border-bottom-color: dimgray !important;
+}
+html.a11y-high-contrast .road-card-name { color: white !important; }
+html.a11y-high-contrast .road-card-loading { color: silver !important; }
+html.a11y-high-contrast .stat-card .stat-label { color: silver !important; }
+html.a11y-high-contrast .depth-section h4 { color: silver !important; }
+html.a11y-high-contrast .depth-label { color: white !important; }
+html.a11y-high-contrast .depth-pct { color: yellow !important; }
+
+/* Login / signup page */
+html.a11y-high-contrast label { color: white !important; }
+html.a11y-high-contrast .login-card p.subtitle,
+html.a11y-high-contrast .signup-text { color: silver !important; }
+html.a11y-high-contrast .error-msg {
+  background: black !important;
+  color: #ff6b6b !important;
+  border-color: #ff6b6b !important;
+}
+
+
+/* OpenDyslexic font (loaded on demand via CDN) */
+@import url('https://fonts.cdnfonts.com/css/open-dyslexic');
+
+
+/* Mode 4 – Dyslexia-Friendly */
+html.a11y-dyslexia,
+html.a11y-dyslexia * {
+  font-family: 'Trebuchet MS', 'Calibri', 'Verdana', Arial, sans-serif !important;
+}
+
+html.a11y-dyslexia p,
+html.a11y-dyslexia span,
+html.a11y-dyslexia td,
+html.a11y-dyslexia th,
+html.a11y-dyslexia label,
+html.a11y-dyslexia li,
+html.a11y-dyslexia h1,
+html.a11y-dyslexia h2,
+html.a11y-dyslexia h3,
+html.a11y-dyslexia h4 {
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.14em !important;
+  line-height: 1.9 !important;
+}
+
+
+/* MODE 5 – OPENDYSLEXIC FONT */
+html.a11y-opendyslexic,
+html.a11y-opendyslexic * {
+  font-family: 'Open Dyslexic', 'OpenDyslexic', sans-serif !important;
+}
+
+
+/* Autocomplete dropdown — high contrast overrides */
+html.a11y-high-contrast .autocomplete-list {
+  background: black !important;
+  border: 2px solid white !important;
+  box-shadow: none !important;
+}
+
+html.a11y-high-contrast .autocomplete-list li {
+  color: white !important;
+}
+
+html.a11y-high-contrast .autocomplete-list li:hover,
+html.a11y-high-contrast .autocomplete-list li[aria-selected="true"] {
+  background: black !important;
+  color: yellow !important;
+}
