@@ -5,8 +5,21 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: 'https://imjahbar.github.io' }));
+
+const allowedOrigins = [
+  'https://imjahbar.github.io',
+  'http://localhost:10000',
+  'http://localhost:3000'
+];
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
+    else cb(new Error('Not allowed by CORS'));
+  }
+}));
+
 app.use(express.json());
+app.use(express.static(__dirname));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -132,5 +145,5 @@ app.post('/api/roads/:name/holedata', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
