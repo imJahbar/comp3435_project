@@ -1,3 +1,5 @@
+const API = 'https://uwi-comp3435-project.onrender.com';
+
 // Tab switching
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -55,7 +57,7 @@ function formatHours(hours) {
 let allRoadsCache = null;
 async function loadAllRoads() {
   if (!allRoadsCache) {
-    const res  = await fetch('/api/roads/all');
+    const res  = await fetch(API + '/api/roads/all');
     const data = await res.json();
     if (!data.success) throw new Error('Could not load road data');
     allRoadsCache = data.roads;
@@ -352,7 +354,7 @@ async function handleAddRoadBtn() {
 
   //CHECK phase
   if (checkMode === 'check') {
-    const res  = await fetch(`/api/roads/${encodeURIComponent(name)}`);
+    const res  = await fetch(`${API}/api/roads/${encodeURIComponent(name)}`);
     const data = await res.json();
 
     if (data.success) {
@@ -393,7 +395,7 @@ async function handleAddRoadBtn() {
   const lengthKm  = Math.round(rawLen);
   const addedName = lastCheckedName;
 
-  const res  = await fetch('/api/roads', {
+  const res  = await fetch(API + '/api/roads', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({ name: addedName, type, lengthKm })
@@ -452,7 +454,7 @@ async function handleLogPotholes() {
     return;
   }
 
-  const res  = await fetch(`/api/roads/${encodeURIComponent(name)}/holedata`, {
+  const res  = await fetch(`${API}/api/roads/${encodeURIComponent(name)}/holedata`, {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({ type: 'observation', date, shallow, medium, deep })
@@ -490,7 +492,7 @@ document.getElementById('addpothole-btn').addEventListener('click', handleLogPot
 let lastMaintData = null;
 
 async function fetchMaintData(roadName) {
-  const res  = await fetch(`/api/roads/${encodeURIComponent(roadName)}`);
+  const res  = await fetch(`${API}/api/roads/${encodeURIComponent(roadName)}`);
   const data = await res.json();
   if (!data.success) throw new Error(`Road "${roadName}" not found`);
   const road = data.road;
@@ -591,7 +593,7 @@ document.getElementById('maint-action-btn').addEventListener('click', async () =
     : { type: 'resurface', date: today, cost: calcResurfaceCost(lastMaintData.roadLengthKm) };
 
   try {
-    const res  = await fetch(`/api/roads/${encodeURIComponent(lastMaintData.name)}/holedata`, {
+    const res  = await fetch(`${API}/api/roads/${encodeURIComponent(lastMaintData.name)}/holedata`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(entry)

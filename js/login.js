@@ -1,3 +1,4 @@
+const API = 'https://uwi-comp3435-project.onrender.com';
 const form = document.getElementById('login-form');
 const errorMsg = document.getElementById('errorMsg');
 
@@ -16,7 +17,7 @@ form.addEventListener('submit', async function (e) {
   }
 
   try {
-    const res  = await fetch('/login', {
+    const res  = await fetch(API + '/login', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ email, password })

@@ -1,3 +1,4 @@
+const API = 'https://uwi-comp3435-project.onrender.com';
 const form       = document.getElementById('signup-form');
 const errorMsg   = document.getElementById('errorMsg');
 const successMsg = document.getElementById('successMsg');
@@ -51,7 +52,7 @@ form.addEventListener('submit', async function (e) {
   }
 
   try {
-    const res  = await fetch('/register', {
+    const res  = await fetch(API + '/register', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ fullname, email, password, role })

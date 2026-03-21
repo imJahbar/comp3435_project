@@ -1,14 +1,12 @@
-/* ─────────────────────────────────────────────────────────────
-   login.css — login & signup pages only
-───────────────────────────────────────────────────────────── */
+/* LOGIN.CSS */
 
-/* override shared.css — login uses a side-by-side two-panel layout */
+/* OVERRIDE SHARED.CSS */
 body {
   flex-direction: row;
   overflow: visible;
 }
 
-/* ── Two-panel layout ── */
+/* Two-panel layout */
 .panel-left {
   flex: 1;
   display: flex;
@@ -32,7 +30,7 @@ body {
 .brand-name { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0.75rem; }
 .brand-tagline { font-size: 1rem; color: rgba(255, 255, 255, 0.6); max-width: 280px; text-align: center; line-height: 1.6; }
 
-/* ── Login card ── */
+/* Login card */
 .login-card {
   background: white;
   border-radius: 16px;
@@ -45,7 +43,7 @@ body {
 .login-card h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
 .login-card p.subtitle { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; }
 
-/* ── Form ── */
+/* Form */
 .form-group { margin-bottom: 1.25rem; }
 
 label {
@@ -113,7 +111,7 @@ select:focus {
 .signup-text a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .signup-text a:hover { text-decoration: underline; }
 
-/* ── Messages ── */
+/* Messages */
 .error-msg {
   display: none;
   background: mistyrose;

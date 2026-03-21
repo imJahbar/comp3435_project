@@ -1,3 +1,5 @@
+const API = 'https://uwi-comp3435-project.onrender.com';
+
 // ─────────────────────────────────────────────────────────────
 // Tab switching (with ARIA aria-selected)
 // ─────────────────────────────────────────────────────────────
@@ -30,7 +32,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 let roadNames = null;
 async function loadRoadNames() {
   if (!roadNames) {
-    const res  = await fetch('/api/roads');
+    const res  = await fetch(API + '/api/roads');
     const data = await res.json();
     if (!data.success) throw new Error('Could not load road names');
     roadNames = data.roads.map(r => r.name);
@@ -144,7 +146,7 @@ function roadPct(n, total) { return total > 0 ? Math.round(n / total * 100) : 0;
 // shallow / medium / deep are percentages 0–100
 // ─────────────────────────────────────────────────────────────
 async function fetchRoadData(roadName) {
-  const res  = await fetch(`/api/roads/${encodeURIComponent(roadName)}`);
+  const res  = await fetch(`${API}/api/roads/${encodeURIComponent(roadName)}`);
   const data = await res.json();
   if (!data.success) throw new Error(`Road "${roadName}" not found`);
   const road  = data.road;
