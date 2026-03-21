@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Road Metrics – RSSH</title>
+  <title>Feedback – RSSH</title>
   <link rel="stylesheet" href="css/shared.css" />
-  <link rel="stylesheet" href="css/user.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
   <link rel="stylesheet" href="css/accessibility.css" />
 </head>
 <body>
@@ -15,108 +15,101 @@
 
   <!-- Header -->
   <header role="banner">
-    <div class="header-brand">
-      RSSH
-    </div>
+    <div class="header-brand">RSSH</div>
     <div class="header-right">
-      <div class="user-badge">
-        <div class="user-avatar" id="userInitials" aria-hidden="true">JD</div>
-        <span id="userName">John Doe</span>
-      </div>
       <button id="a11y-toggle-btn" class="btn-a11y"
               aria-haspopup="dialog" aria-expanded="false"
               aria-label="Open accessibility settings">
         Accessibility
       </button>
-      <button class="btn-logout" onclick="window.location.href='index.html'">Log Out</button>
+      <a class="back-link" href="javascript:history.back()" aria-label="Go back">&#8592; Back</a>
     </div>
   </header>
 
-  <!-- Tabs Bar -->
-  <div class="tabs-bar" role="tablist" aria-label="User navigation">
-    <button id="tab-btn-roads" class="tab-btn active" role="tab" aria-selected="true"
-            aria-controls="tab-roads" data-tab="roads">My Roads</button>
-  </div>
-
   <main id="main-content">
+    <div class="feedback-page">
 
-    <!-- TAB 1 – MY ROADS -->
-    <div id="tab-roads" class="tab-content active" role="tabpanel"
-         aria-labelledby="tab-btn-roads" tabindex="0">
+      <!-- About the Project -->
+      <section class="about-card" aria-labelledby="about-heading">
+        <div class="about-card-header">
+          <h2 id="about-heading">About This Project</h2>
+        </div>
+        <div class="about-card-body">
 
-      <div class="roads-page">
-
-        <!-- Add Road -->
-        <section class="add-road-section" aria-label="Add a road">
-          <div class="add-road-row">
-            <label for="roadNameInput" class="sr-only">Road name</label>
-            <div class="autocomplete-wrap">
-              <input type="text" id="roadNameInput"
-                     placeholder="Enter a road name…" autocomplete="off"
-                     role="combobox" aria-autocomplete="list"
-                     aria-expanded="false" aria-haspopup="listbox"
-                     aria-controls="user-road-opts"
-                     aria-label="Road name" />
-              <ul id="user-road-opts" role="listbox"
-                  class="autocomplete-list hidden"
-                  aria-label="Road name suggestions"></ul>
-            </div>
-            <button class="btn-add-road" id="addRoadBtn">+ Add Road</button>
-          </div>
-          <div id="addRoadError" class="add-road-error hidden" role="alert"></div>
-        </section>
-
-        <!-- Summary Card -->
-        <section class="summary-section" aria-labelledby="summary-heading">
-          <h2 id="summary-heading">Summary</h2>
-
-          <div id="summaryIdle" class="summary-idle">
-            <p>Add roads above to view aggregate metrics.</p>
+          <div class="about-project" style="text-align: center;">
+            <p>
+              <strong>RSSH (Road and Smart Solutions for Holes)</strong> is a web-based pothole monitoring system
+              developed for COMP3435 User Interface Design. It allows regular users a personalised view of road 
+              conditions on roads they care about. It also provides maintenance crews to log pothole observations,
+              estimate repair costs, and generate reports. The system is designed to be accessible to a number of 
+              groups with disabilities but it caters specifically to elderly and persons with dyslexia with a 
+              number of built in visual customizations available on the accessibility tab.
+            </p>
           </div>
 
-          <div id="summaryData" class="summary-data hidden" aria-live="polite">
-            <div class="stats-row">
-              <div class="stat-card">
-                <div class="stat-value" id="summaryTotalPotholes">–</div>
-                <div class="stat-label">Total Potholes</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-value" id="summaryAvgDist">–</div>
-                <div class="stat-label">Avg. Distance (m)</div>
-              </div>
-            </div>
-            <div class="depth-section">
-              <h4>Avg. Depth Breakdown</h4>
-              <div class="depth-pct-rows">
-                <div class="depth-pct-row">
-                  <span class="depth-label">Shallow</span>
-                  <span class="depth-pct" id="summaryShallowPct">–</span>
-                </div>
-                <div class="depth-pct-row">
-                  <span class="depth-label">Medium</span>
-                  <span class="depth-pct" id="summaryMediumPct">–</span>
-                </div>
-                <div class="depth-pct-row">
-                  <span class="depth-label">Deep</span>
-                  <span class="depth-pct" id="summaryDeepPct">–</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+          <!-- Team Members -->
+          <table class="team-table" aria-label="Project team members">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Student ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Brensley Bacchus</td>
+                <td class="member-id">400018003</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jabar Caddle</td>
+                <td class="member-id">400011802</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Na-Jerry</td>
+                <td class="member-id">400017565</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Goodness Ogunkola</td>
+                <td class="member-id">400006368</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <!-- Road Cards -->
-        <section aria-label="Added roads">
-          <div id="roadsEmpty" class="roads-empty">
-            <p>No roads added yet. Enter a road name above to get started.</p>
-          </div>
-          <div id="roadCardsContainer" class="road-cards hidden" aria-live="polite"></div>
-        </section>
+        </div>
+      </section>
 
-      </div>
+      <!-- Feedback Form -->
+      <section class="form-card" aria-labelledby="form-heading">
+        <div class="form-card-header">
+          <h2 id="form-heading">Leave Feedback</h2>
+        </div>
+        <div class="form-embed-wrap">
+          <!--
+            Replace the src below with your Google Form embed URL.
+            In Google Forms: Send → Embed → copy the src from the <iframe> tag.
+          -->
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSd--5OT4lDgakFr5ZRgLsdqY3bAbktyT6ILXT-pYsGOy2hssw/viewform?usp=publish-editor"
+            title="RSSH Feedback Form"
+            aria-label="RSSH Feedback Form"
+            loading="lazy">
+            Loading feedback form…
+          </iframe>
+        </div>
+      </section>
+
     </div>
-
   </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <span>RSSH &mdash; 2025/2026 Semester 2 COMP3435 Group 11</span>
+  </footer>
 
   <!-- Accessibility panel -->
   <div class="a11y-overlay" id="a11y-overlay" aria-hidden="true"></div>
@@ -196,13 +189,6 @@
 
   <div class="a11y-live" id="a11y-live" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <span>Have feedback?</span>
-    <a class="footer-link" href="feedback.html">Click here to leave feedback</a>
-  </footer>
-
-  <script src="js/user.js"></script>
   <script src="js/accessibility.js"></script>
 
 </body>

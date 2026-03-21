@@ -1,0 +1,120 @@
+/* FEEDBACK.CSS */
+
+/* Override shared body constraints for a scrollable page */
+body {
+  height: auto;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.feedback-page {
+  flex: 1;
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Card shared style */
+.about-card,
+.form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.about-card-header,
+.form-card-header {
+  background: linear-gradient(90deg, var(--brand-dark) 0%, var(--brand) 100%);
+  color: white;
+  padding: 1.1rem 1.5rem;
+}
+
+.about-card-header h2,
+.form-card-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.about-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Project write-up */
+.about-project p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Team table */
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.team-table thead tr {
+  background: whitesmoke;
+  border-bottom: 2px solid var(--border);
+}
+
+.team-table th {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  color: var(--brand);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.team-table td {
+  padding: 0.65rem 1rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.team-table tbody tr:last-child td { border-bottom: none; }
+.team-table tbody tr:hover { background: aliceblue; }
+
+.member-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Google Form embed */
+.form-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  min-height: 600px;
+}
+
+/* Back link in header */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.15s;
+}
+
+.back-link:hover { background: rgba(255, 255, 255, 0.18); }
+.back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
