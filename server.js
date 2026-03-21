@@ -6,17 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-const allowedOrigins = [
-  'https://imjahbar.github.io',
-  'http://localhost:10000',
-  'http://localhost:3000'
-];
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) cb(null, true);
-    else cb(new Error('Not allowed by CORS'));
-  }
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static(__dirname));
