@@ -185,10 +185,6 @@
   gap: 0.3rem;
 }
 
-.depth-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.depth-dot.shallow { background: var(--warning); }
-.depth-dot.medium  { background: var(--depth-medium); }
-.depth-dot.deep    { background: var(--error); }
 
 .pothole-input-group input[type="number"] {
   padding: 0.55rem 0.75rem;
