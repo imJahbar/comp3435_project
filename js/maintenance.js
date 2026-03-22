@@ -344,6 +344,7 @@ async function handleAddRoadBtn() {
   const name    = input.value.trim();
 
   errorEl.classList.add('hidden');
+  document.getElementById('addroad-success').classList.add('hidden');
 
   if (!name) {
     errorEl.textContent = 'Please enter a road name.';
@@ -413,7 +414,10 @@ async function handleAddRoadBtn() {
     allRoadNames.push(addedName);
   }
 
-  setCheckMsg(`<div class="road-check-found">&#10003; "${addedName}" added (${formatType(type)}, ${lengthKm} km). You can now log potholes for it.</div>`, true);
+  const successEl = document.getElementById('addroad-success');
+  successEl.textContent = `✓ "${addedName}" added — ${formatType(type)}, ${lengthKm} km.`;
+  successEl.classList.remove('hidden');
+  setTimeout(() => successEl.classList.add('hidden'), 4000);
   input.value    = '';
   typeEl.value   = '';
   lengthEl.value = '';
@@ -603,8 +607,12 @@ document.getElementById('maint-action-btn').addEventListener('click', async () =
 
     clearRoadsCache();
     btn.textContent = 'Logged ✓';
+    const maintSuccessEl = document.getElementById('maint-success');
+    maintSuccessEl.textContent = `✓ ${action === 'repair' ? 'Repair' : 'Resurfacing'} logged for "${lastMaintData.name}" on ${today}.`;
+    maintSuccessEl.classList.remove('hidden');
     setTimeout(() => {
       btn.disabled    = false;
+      maintSuccessEl.classList.add('hidden');
       resetMaintTab();
     }, 2000);
   } catch {
