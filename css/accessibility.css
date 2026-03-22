@@ -265,6 +265,20 @@ html.a11y-high-contrast header {
   box-shadow: none !important;
 }
 
+/* Footer */
+html.a11y-high-contrast .site-footer {
+  background: black !important;
+  border-top: 2px solid white !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+html.a11y-high-contrast .footer-link {
+  color: white !important;
+}
+
+html.a11y-high-contrast .footer-link:hover { color: yellow !important; }
+
 html.a11y-high-contrast .header-brand,
 html.a11y-high-contrast .user-badge,
 html.a11y-high-contrast #userName {
