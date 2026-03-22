@@ -148,7 +148,7 @@ function roadPct(n, total) { return total > 0 ? Math.round(n / total * 100) : 0;
 async function fetchRoadData(roadName) {
   const res  = await fetch(`${API}/api/roads/${encodeURIComponent(roadName)}`);
   const data = await res.json();
-  if (!data.success) throw new Error(`Road "${roadName}" not found`);
+  if (!data.success) throw Object.assign(new Error('not_found'), { code: 'not_found' });
   const road  = data.road;
   const net   = getRoadNet(road);
   const total = net.shallow + net.medium + net.deep;
@@ -261,7 +261,7 @@ function createRoadCard(road) {
         </div>
       </div>
       <div class="road-card-error hidden" role="alert">
-        <span class="road-error-msg">Could not load data. Backend not connected yet.</span>
+        <span class="road-error-msg"></span>
       </div>
     </div>`;
 
@@ -280,6 +280,7 @@ function updateRoadCard(road) {
   loadingEl.classList.add('hidden');
 
   if (road.status === 'error') {
+    errorEl.querySelector('.road-error-msg').textContent = road.errorMsg || 'Could not load data.';
     errorEl.classList.remove('hidden');
     return;
   }
@@ -311,8 +312,11 @@ async function addRoad(name) {
   try {
     road.data   = await fetchRoadData(name);
     road.status = 'loaded';
-  } catch {
-    road.status = 'error';
+  } catch (err) {
+    road.status   = 'error';
+    road.errorMsg = err.code === 'not_found'
+      ? `No data found for "${name}".`
+      : 'Could not connect to the server. Please try again.';
   }
 
   updateRoadCard(road);
@@ -345,6 +349,13 @@ function handleAddRoad() {
 
   if (roads.some(r => r.name.toLowerCase() === name.toLowerCase())) {
     errorEl.textContent = `"${name}" has already been added.`;
+    errorEl.classList.remove('hidden');
+    input.focus();
+    return;
+  }
+
+  if (roadNames && !roadNames.some(n => n.toLowerCase() === name.toLowerCase())) {
+    errorEl.textContent = `"${name}" was not found in the system. Please select a road from the list.`;
     errorEl.classList.remove('hidden');
     input.focus();
     return;
