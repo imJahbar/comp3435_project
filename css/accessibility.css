@@ -578,7 +578,7 @@ html.a11y-high-contrast .error-msg {
 /* Mode 4 – Dyslexia-Friendly */
 html.a11y-dyslexia,
 html.a11y-dyslexia * {
-  font-family: 'Trebuchet MS', 'Calibri', 'Verdana', Arial, sans-serif !important;
+  font-family: 'Segoe UI', system-ui, sans-serif !important;
 }
 
 html.a11y-dyslexia p,
