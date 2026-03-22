@@ -370,7 +370,7 @@
 /* TAB 3 – REPORTS */
 .reports-page { display: flex; flex-direction: column; gap: 2rem; max-width: 1100px; }
 
-.report-section { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); overflow: hidden; }
+.report-section { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); }
 
 .report-section-header {
   display: flex;
